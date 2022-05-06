@@ -13,3 +13,11 @@ module asia 'asia.bicep' = {
     password: password
   }
 }
+
+module franceAsia 'modules/vnet-peering.bicep' = {
+  name: 'peer-france-asia'
+  params: {
+    localVnetId: france.outputs.vnetId
+    remoteVnetId: asia.outputs.vnetId
+  }
+}
