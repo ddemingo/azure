@@ -1,25 +1,15 @@
-param location string = 'francecentral'
+var password = 'P@ssw0rdxxxx'
 
-module vnet 'modules/vnet.bicep' = {
-  name: 'vnet-test'
+module france 'france.bicep' = {
+  name: 'france'
   params: {
-    location: location
-    id: 5
+    password: password
   }
 }
 
-module vnet2 'modules/vnet.bicep' = {
-  name: 'vnet-test2'
+module asia 'asia.bicep' = {
+  name: 'asia'
   params: {
-    location: 'westeurope'
-    id: 5
-  }
-}
-
-module peer 'modules/vnet-peering.bicep' = {
-  name: 'peer'
-  params: {
-    localVnetId: vnet.outputs.vnetId
-    remoteVnetId: vnet2.outputs.vnetId
+    password: password
   }
 }

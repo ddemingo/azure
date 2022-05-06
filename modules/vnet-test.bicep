@@ -11,6 +11,11 @@ module vnet 'vnet.bicep' = {
   params: {
     location: location
     id: 1
+    subnets: [
+      0
+      1
+      2
+    ]
   }
 }
 
@@ -20,6 +25,6 @@ module vm 'vm.bicep' = {
     location: location
     id: 1
     adminPassword: 'P@ssw0rdxxxx'
-    subnetId: vnet.outputs.subnets[0].id
+    subnetId: vnet.outputs.subnets[1].id
   }
 }

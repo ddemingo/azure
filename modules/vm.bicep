@@ -1,5 +1,3 @@
-// // https://github.com/Azure/bicep/blob/main/docs/examples/101/vm-simple-linux/main.bicep
-
 @description('The location of you Virtual Machine.')
 param location string
 
