@@ -4,19 +4,16 @@ param password string
 var location = 'francecentral'
 
 module vnet 'modules/vnet.bicep' = {
-  name: 'vnet'
+  name: 'france-vnet'
   params: {
     location: location
-    id: 1
-    subnets: [
-      0
-      1
-    ]
+    secondIpByte: 1
+    numberOfSubnets: 2
   }
 }
 
 module vm 'modules/vm.bicep' = {
-  name: 'vm'
+  name: 'france-vm'
   params: {
     location: location
     id: 1

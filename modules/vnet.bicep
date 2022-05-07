@@ -3,26 +3,27 @@ param location string
 @description('10.x.0.0/16')
 @minValue(1)
 @maxValue(254)
-param id int
+param secondIpByte int
 
-@description('10.x.y.0/24')
-param subnets array = [
-  0
-]
+@description('Number of subnets to create')
+param numberOfSubnets int = 1
+
+@description('Create a vpn GatewaySubnet; it will be the first subnet from output.subnets')
+param createVpnGatewaySubnet bool = false
 
 resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
-  name: 'vnet-${location}-10.${id}'
+  name: 'vnet-${location}-10.${secondIpByte}'
   location: location
   properties: {
     addressSpace: {
       addressPrefixes: [
-        '10.${id}.0.0/16'
+        '10.${secondIpByte}.0.0/16'
       ]
     }
-    subnets: [for subnet in subnets: {
-      name: 'subnet-10.${id}.${subnet}'
+    subnets: [for thirdIpByte in range(1, numberOfSubnets): {
+      name: createVpnGatewaySubnet && thirdIpByte == 1 ? 'GatewaySubnet' : 'subnet-${location}-10.${secondIpByte}.${thirdIpByte}'
       properties: {
-        addressPrefix: '10.${id}.${subnet}.0/24'
+        addressPrefix: '10.${secondIpByte}.${thirdIpByte}.0/24'
       }
     }]
   }
