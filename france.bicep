@@ -7,7 +7,7 @@ module vnet 'shared/vnet.bicep' = {
   name: 'france-vnet'
   params: {
     location: location
-    secondIpByte: 1
+    netId: 1
     numberOfSubnets: 2
   }
 }

@@ -1,26 +1,12 @@
-//
-// https://docs.microsoft.com/es-es/learn/modules/improve-app-scalability-resiliency-with-load-balancer/4-exercise-configure-public-load-balancer?pivots=bash
-// 
-// 2 horas: vm
-//
-
 var location = 'francecentral'
 
 module vnet 'vnet.bicep' = {
-  name: 'vnet'
+  name: 'shared-vnet-test'
   params: {
     location: location
-    secondIpByte: 100
+    netId: 100
     numberOfSubnets: 3
   }
 }
 
-module vm 'vm.bicep' = {
-  name: 'vm'
-  params: {
-    location: location
-    id: 1
-    adminPassword: 'P@ssw0rdxxxx'
-    subnetId: vnet.outputs.subnets[1].id
-  }
-}
+output subnet1 string = vnet.outputs.subnets[1].id

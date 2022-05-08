@@ -4,7 +4,7 @@ module vnet 'shared/vnet.bicep' = {
   name: 'us-vnet'
   params: {
     location: location
-    secondIpByte: 3
+    netId: 3
     numberOfSubnets: 2
     createVpnGatewaySubnet: true
   }
