@@ -14,6 +14,8 @@ param adminUsername string = 'azure'
 @secure()
 param adminPassword string
 
+param publicIpAddressId string = ''
+
 var name = 'vm-${location}-${id}'
 
 resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = {

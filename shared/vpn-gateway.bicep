@@ -1,3 +1,5 @@
+// https://docs.microsoft.com/en-us/azure/vpn-gateway/
+
 param location string
 
 @description('Subnet to connect the VM to.')

@@ -9,8 +9,9 @@ param netId int
 param numberOfSubnets int = 1
 
 @description('Create a vpn GatewaySubnet; it will be the first subnet from output.subnets')
-param createVpnGatewaySubnet bool = false
+param withGatewaySubnet bool = false
 
+// https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks?tabs=bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
   name: 'vnet-${location}-10.${netId}'
   location: location
@@ -20,32 +21,29 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
         '10.${netId}.0.0/16'
       ]
     }
-    subnets: [for subnetId in range(1, numberOfSubnets): {
-      name: createVpnGatewaySubnet && subnetId == 1 ? 'GatewaySubnet' : 'subnet-${location}-10.${netId}.${subnetId}'
+    subnets: [for subnetId in range(1, numberOfSubnets): withGatewaySubnet && subnetId == 1 ? {
+      name: 'GatewaySubnet'
+      properties: {
+        addressPrefix: '10.${netId}.${subnetId}.0/24'
+      }
+    } : {
+      name: 'subnet-${location}-10.${netId}.${subnetId}'
       properties: {
         addressPrefix: '10.${netId}.${subnetId}.0/24'
         networkSecurityGroup: {
-          properties: {
-            securityRules: [
-              {
-                properties: {
-                  direction: 'Inbound'
-                  protocol: '*'
-                  access: 'Allow'
-                }
-              }
-              {
-                properties: {
-                  direction: 'Outbound'
-                  protocol: '*'
-                  access: 'Allow'
-                }
-              }
-            ]
-          }
+          id: nsg.id
         }
       }
     }]
+  }
+}
+
+// https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups?tabs=bicep
+resource nsg 'Microsoft.Network/networkSecurityGroups@2021-08-01' = if (withGatewaySubnet) {
+  name: 'nsg-${location}-10.${netId}'
+  location: location
+  properties: {
+    securityRules: []
   }
 }
 

@@ -6,7 +6,7 @@ module vnet 'vnet.bicep' = {
     location: location
     netId: 200
     numberOfSubnets: 2
-    createVpnGatewaySubnet: true
+    withGatewaySubnet: true
   }
 }
 

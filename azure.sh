@@ -1,24 +1,30 @@
 #!/bin/bash
 
 case $1 in
+
     login)
-        az login --tenant ddemingolamerce.onmicrosoft.com
-        az configure --defaults group='test'
-    ;;
-    login-sandbox)
         az login --tenant learn.docs.microsoft.com
         az configure --defaults group=`az group list --query '[].name' --output tsv`
     ;;
+
+    login-prod)
+        az login --tenant ddemingolamerce.onmicrosoft.com
+        az configure --defaults group='test'
+    ;;
+
     deploy)
         # https://docs.microsoft.com/en-us/cli/azure/deployment/group?view=azure-cli-latest
         az deployment group create --template-file $2
     ;;
+
     group-create)
         az group create --location francecentral --name test  
     ;;
+
     group-delete)
-        az group delete --location francecentral --name test
+        az group delete --name test
     ;;
+    
     *)
         echo "unkown command"
     ;;
