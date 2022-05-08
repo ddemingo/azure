@@ -8,8 +8,11 @@ param netId int
 @description('Number of subnets to create')
 param numberOfSubnets int = 1
 
-@description('Create a vpn GatewaySubnet; it will be the first subnet from output.subnets')
+@description('Not in sanbox; creates a vpn GatewaySubnet; it will be the first subnet from output.subnets')
 param withGatewaySubnet bool = false
+
+@description('Not in sandbox; subscription creates a mandatory NSG to restrict the vnet')
+param withNetworkSecurityGroup bool = false
 
 // https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks?tabs=bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
@@ -26,13 +29,18 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
       properties: {
         addressPrefix: '10.${netId}.${subnetId}.0/24'
       }
-    } : {
+    } : withNetworkSecurityGroup ? {
       name: 'subnet-${location}-10.${netId}.${subnetId}'
       properties: {
         addressPrefix: '10.${netId}.${subnetId}.0/24'
         networkSecurityGroup: {
           id: nsg.id
         }
+      }
+    } : {
+      name: 'subnet-${location}-10.${netId}.${subnetId}'
+      properties: {
+        addressPrefix: '10.${netId}.${subnetId}.0/24'
       }
     }]
   }

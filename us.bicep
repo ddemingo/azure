@@ -8,3 +8,5 @@ module vnet 'shared/vnet.bicep' = {
     numberOfSubnets: 2
   }
 }
+
+output vnetId string = vnet.outputs.vnetId

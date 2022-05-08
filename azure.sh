@@ -7,7 +7,7 @@ case $1 in
         az configure --defaults group=`az group list --query '[].name' --output tsv`
     ;;
 
-    login-prod)
+    login-default)
         az login --tenant ddemingolamerce.onmicrosoft.com
         az configure --defaults group='test'
     ;;
