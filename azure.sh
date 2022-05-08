@@ -6,6 +6,7 @@ case $1 in
         az configure --defaults group=`az group list --query '[].name' --output tsv`
     ;;
     deploy)
+        # https://docs.microsoft.com/en-us/cli/azure/deployment/group?view=azure-cli-latest
         az deployment group create --template-file $2
     ;;
     deploy-complete)
