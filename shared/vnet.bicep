@@ -24,6 +24,26 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
       name: createVpnGatewaySubnet && thirdIpByte == 1 ? 'GatewaySubnet' : 'subnet-${location}-10.${secondIpByte}.${thirdIpByte}'
       properties: {
         addressPrefix: '10.${secondIpByte}.${thirdIpByte}.0/24'
+        networkSecurityGroup: {
+          properties: {
+            securityRules: [
+              {
+                properties: {
+                  direction: 'Inbound'
+                  protocol: '*'
+                  access: 'Allow'
+                }
+              }
+              {
+                properties: {
+                  direction: 'Outbound'
+                  protocol: '*'
+                  access: 'Allow'
+                }
+              }
+            ]
+          }
+        }
       }
     }]
   }

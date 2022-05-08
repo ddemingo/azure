@@ -10,12 +10,8 @@ module vnet 'vnet.bicep' = {
   name: 'vnet'
   params: {
     location: location
-    id: 1
-    subnets: [
-      0
-      1
-      2
-    ]
+    secondIpByte: 100
+    numberOfSubnets: 3
   }
 }
 

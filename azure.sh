@@ -13,3 +13,6 @@ case $1 in
     ;;
 esac
 
+# https://docs.microsoft.com/es-es/learn/modules/improve-app-scalability-resiliency-with-load-balancer/4-exercise-configure-public-load-balancer?pivots=bash
+# 2 horas: vm, vnet
+

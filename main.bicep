@@ -14,7 +14,7 @@ module asia 'asia.bicep' = {
   }
 }
 
-module franceAsia 'modules/vnet-peering.bicep' = {
+module franceAsia 'shared/vnet-peering.bicep' = {
   name: 'peer-france-asia'
   params: {
     localVnetId: france.outputs.vnetId

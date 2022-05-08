@@ -3,7 +3,7 @@ param password string
 
 var location = 'francecentral'
 
-module vnet 'modules/vnet.bicep' = {
+module vnet 'shared/vnet.bicep' = {
   name: 'france-vnet'
   params: {
     location: location
@@ -12,7 +12,7 @@ module vnet 'modules/vnet.bicep' = {
   }
 }
 
-module vm 'modules/vm.bicep' = {
+module vm 'shared/vm.bicep' = {
   name: 'france-vm'
   params: {
     location: location

@@ -1,6 +1,6 @@
 var location = 'westus'
 
-module vnet 'modules/vnet.bicep' = {
+module vnet 'shared/vnet.bicep' = {
   name: 'us-vnet'
   params: {
     location: location
@@ -10,7 +10,7 @@ module vnet 'modules/vnet.bicep' = {
   }
 }
 
-module vpnGateway 'modules/vpn-gateway.bicep' = {
+module vpnGateway 'shared/vpn-gateway.bicep' = {
   name: 'us-vpn-gateway'
   params: {
     location: location

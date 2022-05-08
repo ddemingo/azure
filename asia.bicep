@@ -3,7 +3,7 @@ param password string
 
 var location = 'eastasia'
 
-module vnet 'modules/vnet.bicep' = {
+module vnet 'shared/vnet.bicep' = {
   name: 'asia-vnet'
   params: {
     location: location
@@ -12,7 +12,7 @@ module vnet 'modules/vnet.bicep' = {
   }
 }
 
-module vm 'modules/vm.bicep' = {
+module vm 'shared/vm.bicep' = {
   name: 'asia-vm'
   params: {
     location: location
