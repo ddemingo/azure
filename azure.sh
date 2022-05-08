@@ -9,6 +9,7 @@ case $1 in
 
     login-default)
         az login --tenant ddemingolamerce.onmicrosoft.com
+        az group create --location francecentral --name test  
         az configure --defaults group='test'
     ;;
 
@@ -17,12 +18,9 @@ case $1 in
         az deployment group create --template-file $2
     ;;
 
-    group-create)
-        az group create --location francecentral --name test  
-    ;;
-
-    group-delete)
+    delete)
         az group delete --name test
+        az group create --location francecentral --name test  
     ;;
     
     *)
