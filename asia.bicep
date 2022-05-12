@@ -12,14 +12,15 @@ module vnet 'shared/vnet.bicep' = {
   }
 }
 
-module vm 'shared/vm.bicep' = {
-  name: 'asia-vm'
+module vms 'shared/vm.bicep' = [for id in range(1, 2): {
+  name: 'asia-vm-${id}'
   params: {
     location: location
-    id: 1
-    adminPassword: password
+    id: id
     subnetId: vnet.outputs.subnets[1].id
+    adminPassword: password
+    script: loadTextContent('asia.sh', 'utf-8')
   }
-}
+}]
 
 output vnetId string = vnet.outputs.vnetId

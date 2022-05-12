@@ -16,9 +16,11 @@ param adminPassword string
 
 param publicIpAddressId string = ''
 
+param script string = ''
+
 var name = 'vm-${location}-${id}'
 
-resource vm 'Microsoft.Compute/virtualMachines@2021-11-01' = {
+resource virtualMachine 'Microsoft.Compute/virtualMachines@2021-11-01' = {
   name: name
   location: location
   properties: {
@@ -84,6 +86,18 @@ resource ip 'Microsoft.Network/publicIPAddresses@2021-05-01' = {
   properties: {
     publicIPAllocationMethod: 'Dynamic'
     publicIPAddressVersion: 'IPv4'
+  }
+}
+
+// https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/runcommands?tabs=bicep
+resource vmExtension 'Microsoft.Compute/virtualMachines/runCommands@2021-11-01' = if (script != '') {
+  parent: virtualMachine
+  name: '${name}-run-command'
+  location: location
+  properties: {
+    source: {
+      script: script
+    }
   }
 }
 
