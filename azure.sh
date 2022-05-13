@@ -1,10 +1,14 @@
 #!/bin/bash
 
-
 # https://docs.microsoft.com/es-es/learn/modules/improve-app-scalability-resiliency-with-load-balancer/4-exercise-configure-public-load-balancer?pivots=bash
 # 2 horas: vm, vnet
 
 case $1 in
+
+    install) 
+        curl -L https://aka.ms/InstallAzureCli | bash
+        az bicep install
+    ;;
 
     login)
         az login --tenant learn.docs.microsoft.com
