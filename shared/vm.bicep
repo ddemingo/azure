@@ -56,6 +56,7 @@ resource virtualMachine 'Microsoft.Compute/virtualMachines@2021-11-01' = {
   }
 }
 
+// https://docs.microsoft.com/en-us/azure/templates/microsoft.network/2021-05-01/networkinterfaces?tabs=bicep
 resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = {
   name: 'nic-${location}-${id}'
   location: location
@@ -71,6 +72,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = {
           publicIPAddress: {
             id: ip.id
           }
+          loadBalancerBackendAddressPools: []
         }
       }
     ]

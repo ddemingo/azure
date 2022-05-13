@@ -19,7 +19,7 @@ module vms 'shared/vm.bicep' = [for id in range(1, 2): {
     id: id
     subnetId: vnet.outputs.subnets[1].id
     adminPassword: password
-    script: loadTextContent('asia.sh', 'utf-8')
+    script: loadTextContent('apache.sh', 'utf-8')
   }
 }]
 
