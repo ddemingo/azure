@@ -14,6 +14,9 @@ credential = AzureCliCredential()
 
 # Resource Group
 
+
+# TODO get from az configure --defaults if exists
+
 resource_client = ResourceManagementClient(credential, subscription_id)
 group_list = resource_client.resource_groups.list()
 group_name = group_list.next().name
