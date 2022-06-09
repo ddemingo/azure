@@ -6,7 +6,7 @@ from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.compute import ComputeManagementClient
 import subprocess
 
-subscription_id = subprocess.check_output(" az account show --query id --output tsv", shell=True, text=True)
+subscription_id = subprocess.check_output("az account show --query id --output tsv", shell=True, text=True)
 subscription_id = subscription_id.strip()
 print(f"Subscription:\t'{subscription_id}'")
 
