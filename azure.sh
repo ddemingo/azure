@@ -7,7 +7,7 @@ case $1 in
 
     install) 
         curl -L https://aka.ms/InstallAzureCli | bash
-        az bicep install
+        $HOME/bin/az bicep install
     ;;
 
     login)
