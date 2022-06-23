@@ -1,5 +1,7 @@
 # README
 
+[Google Docs](https://drive.google.com/drive/folders/1g4Ld5eXxiU_4r19CNQPBDXHIUm2tEZtD?usp=sharing)
+
 ## Python
 
 Install required python libraries.
