@@ -37,4 +37,8 @@ ssh -o StrictHostKeyChecking=no azure@
 
 ```
 
+## Help
+
+https://github.com/Azure/azure-quickstart-templates
+
 
